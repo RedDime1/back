@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_contact_card_contacts",
+  "info": {
+    "displayName": "Contacts"
+  },
+  "options": {},
+  "attributes": {
+    "mail": {
+      "type": "email"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "adress": {
+      "type": "string"
+    },
+    "github": {
+      "type": "string"
+    }
+  }
+}

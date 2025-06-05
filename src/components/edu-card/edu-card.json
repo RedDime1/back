@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_edu_card_edu_cards",
+  "info": {
+    "displayName": "edu_card"
+  },
+  "options": {},
+  "attributes": {
+    "uni": {
+      "type": "string"
+    },
+    "degree": {
+      "type": "string"
+    },
+    "duration": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "presentations",
+  "info": {
+    "singularName": "presentation",
+    "pluralName": "presentations",
+    "displayName": "Presentation",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "link": {
+      "type": "text"
+    },
+    "description": {
+      "type": "text"
+    },
+    "speakers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::resume.resume",
+      "inversedBy": "presentations"
+    },
+    "name": {
+      "type": "string"
+    },
+    "preview": {
+      "type": "text"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "mappedBy": "presentations"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "resumes",
+  "info": {
+    "singularName": "resume",
+    "pluralName": "resumes",
+    "displayName": "resume",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "education": {
+      "type": "component",
+      "repeatable": true,
+      "component": "edu-card.edu-card"
+    },
+    "work_expirience": {
+      "type": "component",
+      "repeatable": true,
+      "component": "work-card.work"
+    },
+    "personality": {
+      "type": "component",
+      "repeatable": false,
+      "component": "personality-card.personality-test"
+    },
+    "contacts": {
+      "type": "component",
+      "repeatable": false,
+      "component": "contact-card.contacts"
+    },
+    "presentations": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::presentation.presentation",
+      "mappedBy": "speakers"
+    }
+  }
+}

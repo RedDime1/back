@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_work_card_works",
+  "info": {
+    "displayName": "Work"
+  },
+  "options": {},
+  "attributes": {
+    "company_name": {
+      "type": "string"
+    },
+    "job_name": {
+      "type": "string"
+    },
+    "job_location": {
+      "type": "string"
+    },
+    "duration": {
+      "type": "string"
+    },
+    "schedule": {
+      "type": "string"
+    },
+    "job_description": {
+      "type": "text"
+    }
+  }
+}

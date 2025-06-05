@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_personality_card_personality_tests",
+  "info": {
+    "displayName": "Personality Test"
+  },
+  "options": {},
+  "attributes": {
+    "energy": {
+      "type": "integer"
+    },
+    "mind": {
+      "type": "integer"
+    },
+    "nature": {
+      "type": "integer"
+    },
+    "tactics": {
+      "type": "integer"
+    },
+    "personality": {
+      "type": "integer"
+    }
+  }
+}
