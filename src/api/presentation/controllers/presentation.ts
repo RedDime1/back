@@ -10,7 +10,7 @@ export default {
   },
   async findOne(ctx) {
     const { id } = ctx.query;
-    if (!id) {
+    if (id==="null") {
 	const entry = await strapi.entityService.findOne('api::presentation.presentation', 1, 
       { populate: { speakers: true, tags: true } });
     	ctx.body = entry;
