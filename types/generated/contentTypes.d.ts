@@ -434,7 +434,7 @@ export interface ApiCommentComment extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String;
     presentation_id: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
-    rate: Schema.Attribute.Integer;
+    replies: Schema.Attribute.Relation<'oneToMany', 'api::reply.reply'>;
     text_comment: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -475,6 +475,34 @@ export interface ApiPresentationPresentation
     publishedAt: Schema.Attribute.DateTime;
     speakers: Schema.Attribute.Relation<'manyToMany', 'api::resume.resume'>;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiReplyReply extends Struct.CollectionTypeSchema {
+  collectionName: 'replies';
+  info: {
+    displayName: 'reply';
+    pluralName: 'replies';
+    singularName: 'reply';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    comment: Schema.Attribute.Relation<'manyToOne', 'api::comment.comment'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::reply.reply'> &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    name_adr: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    text_comment: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1064,6 +1092,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::comment.comment': ApiCommentComment;
       'api::presentation.presentation': ApiPresentationPresentation;
+      'api::reply.reply': ApiReplyReply;
       'api::resume.resume': ApiResumeResume;
       'api::tag.tag': ApiTagTag;
       'plugin::content-releases.release': PluginContentReleasesRelease;

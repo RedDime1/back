@@ -10,12 +10,10 @@
   "options": {
     "draftAndPublish": true
   },
+  "pluginOptions": {},
   "attributes": {
     "text_comment": {
       "type": "text"
-    },
-    "rate": {
-      "type": "integer"
     },
     "name": {
       "type": "string"
@@ -28,6 +26,12 @@
     },
     "presentation_id": {
       "type": "integer"
+    },
+    "replies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::reply.reply",
+      "mappedBy": "comment"
     }
   }
 }
