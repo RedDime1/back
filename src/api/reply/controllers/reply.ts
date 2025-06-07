@@ -59,7 +59,7 @@ export default factories.createCoreController('api::reply.reply', ({ strapi }) =
         const { comment, author } = ctx.query;
 
         return `
-            <form hx-post="http://localhost:1337/api/replies"
+            <form hx-post="https://steadfast-champion-93368c3d1a.strapiapp.com/api/replies"
             hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}' hx-target="#global-reply-form" 
                 hx-ext="client-side-templates" 
                 mustache-template="empty-template">
@@ -68,7 +68,7 @@ export default factories.createCoreController('api::reply.reply', ({ strapi }) =
               <p>Ответ пользователю ${author}</p>
               <textarea name="text" required></textarea>
               <button type="submit">Отправить</button>
-              <button type="button" hx-get="http://localhost:1337/api/replies/0?hide=true" hx-target="#global-reply-form" 
+              <button type="button" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/replies/0?hide=true" hx-target="#global-reply-form" 
                 hx-ext="client-side-templates" 
                 mustache-template="empty-template">
                 Отмена
