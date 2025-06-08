@@ -138,7 +138,7 @@ export default factories.createCoreController('api::test.test', ({ strapi }) => 
                     }
                 );
                 const progressData = userProgress[0]?.progressData;
-                if (!progressData[courseId].completed.includes(pr_id)) {
+                if (!progressData[courseId].completed.includes(Number(pr_id))) {
 
                     const presentations = await strapi.entityService.findMany(
                         'api::presentation.presentation',
@@ -148,7 +148,7 @@ export default factories.createCoreController('api::test.test', ({ strapi }) => 
                     );
 
 
-                    progressData[courseId].completed.push(pr_id);
+                    progressData[courseId].completed.push(Number(pr_id));
                     progressData[courseId].progress =
                         Math.round((progressData[courseId].completed.length / presentations.length) * 100);
 
