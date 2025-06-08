@@ -9,8 +9,9 @@
     "displayName": "User"
   },
   "options": {
-    "timestamps": true
+    "draftAndPublish": false
   },
+  "pluginOptions": {},
   "attributes": {
     "username": {
       "type": "string",
@@ -70,6 +71,12 @@
       "relation": "oneToMany",
       "target": "api::comment.comment",
       "mappedBy": "users_permissions_user"
+    },
+    "progress": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::progress.progress",
+      "mappedBy": "user"
     }
   }
 }

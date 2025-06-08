@@ -7,7 +7,7 @@ export default {
     {
       method: 'GET',
       path: '/presentations',
-      handler: 'presentation.findAll',
+      handler: 'presentation.findByCourse',
     },
     {
       method: 'GET',
