@@ -17,7 +17,7 @@ export default factories.createCoreController('api::reply.reply', ({ strapi }) =
             }
 
             const filters = {
-                comment: { id: Number(commentId) } // Фильтр по ID комментария
+                comment: { id: Number(commentId) }
             };
 
             const replies = await strapi.entityService.findMany('api::reply.reply', {

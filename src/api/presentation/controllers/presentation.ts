@@ -126,4 +126,49 @@ export default {
             ctx.internalServerError('Failed to fetch presentations');
         }
     },
+    async findByFavourites(ctx) {
+        const user = ctx.state.user;
+        let fav = await strapi.entityService.findMany(
+            'api::favourite.favourite',
+            {
+                filters: { user: user.id },
+                limit: 1
+            }
+        );
+
+        if (!fav.length) {
+            const defaultList = {
+                list: []
+            };
+
+            fav = [await strapi.entityService.create(
+                'api::favourite.favourite',
+                {
+                    data: {
+                        user: user.id,
+                        list: defaultList
+                    }
+                }
+            )];
+        }
+
+        const listId = fav[0].list["list"];
+        console.log(listId);
+
+        if (!Array.isArray(listId)) {
+            return [];
+        }
+
+        const presentations = await strapi.entityService.findMany(
+            'api::presentation.presentation',
+            {
+                filters: { id: { $in: listId } },
+                populate: { speakers: true, tags: true }
+            }
+        );
+
+        return {
+            presentations: !presentations.length ? null : presentations,
+        }
+    },
 };

@@ -479,6 +479,38 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiFavouriteFavourite extends Struct.CollectionTypeSchema {
+  collectionName: 'favourites';
+  info: {
+    displayName: 'favourite';
+    pluralName: 'favourites';
+    singularName: 'favourite';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    list: Schema.Attribute.JSON;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::favourite.favourite'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
 export interface ApiPresentationPresentation
   extends Struct.CollectionTypeSchema {
   collectionName: 'presentations';
@@ -1176,6 +1208,10 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    favourite: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::favourite.favourite'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1220,6 +1256,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::comment.comment': ApiCommentComment;
       'api::course.course': ApiCourseCourse;
+      'api::favourite.favourite': ApiFavouriteFavourite;
       'api::presentation.presentation': ApiPresentationPresentation;
       'api::progress.progress': ApiProgressProgress;
       'api::question.question': ApiQuestionQuestion;

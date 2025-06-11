@@ -18,6 +18,11 @@ export default {
       method: 'GET',
       path: '/presentations/tags',
       handler: 'presentation.findByTags',
+    },
+    {
+      method: 'GET',
+      path: '/presentations/favourites',
+      handler: 'presentation.findByFavourites',
     }
   ],
 };

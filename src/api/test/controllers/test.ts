@@ -7,7 +7,7 @@ export default factories.createCoreController('api::test.test', ({ strapi }) => 
     async findByPresentation(ctx) {
         try {
             const { id } = ctx.query;
-            const prId = id === "null" ? 1 : id;
+            const prId = id === "null" ? 1 : Number(id);
             const user = ctx.state.user;
 
             if (!user) {

@@ -77,6 +77,12 @@
       "relation": "oneToOne",
       "target": "api::progress.progress",
       "mappedBy": "user"
+    },
+    "favourite": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::favourite.favourite",
+      "mappedBy": "user"
     }
   }
 }
