@@ -83,7 +83,7 @@ export default {
 
         return {
             data: entry,
-            registered: !user ? 0 : 1
+            registered: !user ? 0 : {id: entry.id}
         }
 
     },
