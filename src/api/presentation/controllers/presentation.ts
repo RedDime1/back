@@ -10,7 +10,7 @@ export default {
         const presentations = await strapi.entityService.findMany(
             'api::presentation.presentation',
             {
-                filters: { course: courseId },
+                filters: { course: courseId as any },
                 populate: { speakers: true, tags: true }
             }
         );
