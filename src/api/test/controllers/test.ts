@@ -105,12 +105,20 @@ export default factories.createCoreController('api::test.test', ({ strapi }) => 
     },
     async checkAnswers(ctx) {
         try {
-            const { testId, answers, id: presentationId } = ctx.request.body;
+            const { testId, id: presentationId } = ctx.request.body;
             const user = ctx.state.user;
             const pr_id = presentationId === "null" ? 1 : presentationId;
 
             if (!user) {
                 return ctx.unauthorized('Необходима авторизация');
+            }
+
+            const answers = {};
+            for (const [key, value] of Object.entries(ctx.request.body)) {
+                if (key.startsWith('answers_')) {
+                    const questionId = key.replace('answers_', '');
+                    answers[questionId] = value;
+                }
             }
 
 
@@ -120,13 +128,13 @@ export default factories.createCoreController('api::test.test', ({ strapi }) => 
             const courseId = test.course;
 
             let allCorrect = true;
-            let i = 0;
-            const results = test['questions'].map(question => {
-                const userAnswer = answers[i];
-                const isCorrect = userAnswer == question.correct;
-                i++;
-                if (!isCorrect) allCorrect = false;
-            });
+            for (const question of test['questions']) {
+                const userAnswer = answers[question.id];
+                const isCorrect = parseInt(userAnswer) === question.correct;
+                if (!isCorrect) {
+                    allCorrect = false;
+                }
+            }
 
             if (allCorrect) {
 
