@@ -5,7 +5,7 @@
 export default {
     async findByCourse(ctx) {
         const { id } = ctx.query;
-        const courseId = id === "null" ? 1 : id;
+        const courseId = id === "null" ? 1 : Number(id);
         const user = ctx.state.user;
         const presentations = await strapi.entityService.findMany(
             'api::presentation.presentation',
@@ -68,24 +68,24 @@ export default {
     },
     async findOne(ctx) {
         const {id} = ctx.query;
-        if (id === "null") {
-            const entry = await strapi.entityService.findOne('api::presentation.presentation', 1,
-                {populate: {speakers: true, tags: true}});
-            ctx.body = entry;
-        } else {
-            const entry = await strapi.entityService.findOne('api::presentation.presentation', id, {
-                populate: {
-                    speakers: true,
-                    tags: true
-                }
-            });
-
-            if (!entry) {
-                return ctx.notFound('Presentation not found');
+        const prId = id === "null" ? 1 : Number(id);
+        const user = ctx.state.user;
+        const entry = await strapi.entityService.findOne('api::presentation.presentation', prId, {
+            populate: {
+                speakers: true,
+                tags: true
             }
+        });
 
-            ctx.body = entry;
+        if (!entry) {
+            return ctx.notFound('Presentation not found');
         }
+
+        return {
+            data: entry,
+            registered: !user ? 0 : 1
+        }
+
     },
     async findByTags(ctx) {
         const {tags} = ctx.query as { tags?: string | string[] };
