@@ -23,6 +23,11 @@ export default {
       method: 'GET',
       path: '/presentations/favourites',
       handler: 'presentation.findByFavourites',
+    },
+    {
+      method: 'GET',
+      path: '/presentations/assets',
+      handler: 'presentation.findAssets',
     }
   ],
 };

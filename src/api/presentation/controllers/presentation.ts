@@ -66,6 +66,35 @@ export default {
             }
         }
     },
+    async findAssets(ctx) {
+        const { id } = ctx.query;
+        const courseId = id === "null" ? 1 : Number(id);
+
+        const presentations = await strapi.entityService.findMany(
+            'api::presentation.presentation',
+            {
+                filters: { course: courseId as any },
+                fields: ['id'],
+                populate: {
+                    cassets: {
+                        fields: ['url', 'name', 'mime', 'size']
+                    }
+                }
+            }
+        );
+
+        const result = presentations.map(presentation => ({
+            id: presentation.id,
+            assets: presentation['cassets']?.map(asset => ({
+                url: asset.url,
+                name: asset.name,
+                mime: asset.mime,
+                size: asset.size
+            })) || []
+        }));
+
+        return { data: result };
+    },
     async findOne(ctx) {
         const {id} = ctx.query;
         const prId = id === "null" ? 1 : Number(id);

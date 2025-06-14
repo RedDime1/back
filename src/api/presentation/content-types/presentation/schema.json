@@ -41,6 +41,16 @@
       "relation": "manyToOne",
       "target": "api::course.course",
       "inversedBy": "presentations"
+    },
+    "cassets": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

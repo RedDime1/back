@@ -524,6 +524,10 @@ export interface ApiPresentationPresentation
     draftAndPublish: true;
   };
   attributes: {
+    cassets: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
     course: Schema.Attribute.Relation<'manyToOne', 'api::course.course'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
