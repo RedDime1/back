@@ -15,9 +15,9 @@ export default factories.createCoreController(
         const { text_comment, presentation_id } = ctx.request
           .body as CommentCreateRequest;
 
-        if (!text_comment || !presentation_id) {
+        if (!text_comment || text_comment.length > 1024 || !presentation_id) {
           return ctx.badRequest(
-            'Необходимо указать текст'
+            'Необходимо указать или сократить текст'
           );
         }
 
